@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "question": "How does the Food Expiry Tracker help reduce food waste?",
+    "answer": "Our system tracks your food items by expiry date and sends alerts before they expire. This helps you prioritize consumption and reduce unnecessary waste."
+  },
+  {
+    "id": 2,
+    "question": "Can I add and manage my own food items?",
+    "answer": "Yes, once you're logged in, you can easily add new food items, view your list, update details, and even delete them from your inventory."
+  },
+  {
+    "id": 3,
+    "question": "What is a 'nearly expired' item and how is it shown?",
+    "answer": "Food items that will expire within the next 5 days from today are marked as 'Nearly Expired'. These are shown on the homepage and Fridge page to help you act fast."
+  },
+  {
+    "id": 4,
+    "question": "Is my data secure on this platform?",
+    "answer": "Yes, we use JWT-based secure API routes to protect your personal data. Your food list is only visible to you and is stored safely."
+  }
+]

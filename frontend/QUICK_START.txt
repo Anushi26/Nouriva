@@ -1,0 +1,32 @@
+NOURIVA QUICK START
+
+1. Make sure MongoDB80 is running.
+2. Create a root .env file from .env.example:
+   PORT=5000
+   MongoDB_HOST=localhost
+   MongoDB_PORT=3306
+   MongoDB_USER=root
+   MongoDB_PASSWORD=YOUR_MongoDB_PASSWORD
+   MongoDB_DATABASE=nouriva
+   JWT_SECRET=YOUR_LONG_RANDOM_SECRET
+
+3. In the project folder:
+   npm install
+
+4. Terminal 1:
+   node server/index.js
+
+5. Terminal 2:
+   npm run dev
+
+6. Open:
+   http://localhost:5173/
+
+Demo:
+Get Started -> Sign Up -> Login -> Home/Dashboard -> Add Food -> Expiry Tracking
+-> Share Surplus -> Marketplace -> Request -> Requests -> Complete Pickup
+-> Impact/Leaderboard -> Recipes -> Profile -> Admin (admin account only)
+
+To make an account admin:
+USE nouriva;
+UPDATE users SET role='admin' WHERE email='your-email@example.com';

@@ -1,0 +1,51 @@
+NOURIVA - PRIVATE CHAT UPDATED VERSION
+=========================================
+
+This version includes:
+- Private chat between a food requester and food owner
+- Chat is available only after a request is accepted
+- Only the two participants can read/send messages
+- Chat messages are stored in MongoDB
+- Existing login database uses the `users.password` column
+- /home/chat?requestId=REQUEST_ID route is included
+- Requests page has the Private Chat button for accepted requests
+
+IMPORTANT:
+1. Keep your existing server/.env file. It is intentionally NOT included in this ZIP.
+2. Do not delete your existing MongoDB data.
+3. Start MongoDB.
+4. From the project folder run:
+       npm install
+5. Start backend:
+       node server/index.js
+6. Start frontend in another terminal:
+       npm run dev
+
+The backend automatically creates:
+    conversations
+    messages
+
+The current database users table should have:
+    id, name, email, password, photo_url, role, created_at, updated_at
+
+Private chat flow:
+    User A shares food
+    -> User B requests it
+    -> Owner accepts request
+    -> Requests page shows Private Chat
+    -> Both users can chat using:
+       /home/chat?requestId=<request id>
+
+If an existing old session causes problems after the backend change:
+    - log out
+    - clear localStorage for nouriva_token/nouriva_user
+    - log in again
+
+Main changed files:
+    server/index.js
+    server/routes/chat.js
+    src/Pages/Chat.jsx
+    src/Components/ChatMessage.jsx
+    src/Pages/Requests.jsx
+    src/Routes/Routes.jsx
+    database.sql

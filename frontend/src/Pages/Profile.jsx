@@ -1,0 +1,12 @@
+import {useContext,useState} from "react"; import axios from "axios"; import {AuthContext} from "../Provider/AuthProvider"; import {toast} from "react-toastify";
+const API=import.meta.env.VITE_API_URL||"http://localhost:5000/api";
+export default function Profile(){
+ const {user,updateUser}=useContext(AuthContext); const [name,setName]=useState(user?.displayName||""); const [photo,setPhoto]=useState(user?.photoURL||"");
+ const [current,setCurrent]=useState(""); const [next,setNext]=useState("");
+ const save=async e=>{e.preventDefault();try{await updateUser({displayName:name,photoURL:photo});toast.success("Profile updated.")}catch{toast.error("Could not update profile.")}};
+ const change=async e=>{e.preventDefault();try{await axios.put(`${API}/auth/change-password`,{currentPassword:current,newPassword:next},{headers:{Authorization:`Bearer ${localStorage.getItem("nouriva_token")}`}});toast.success("Password changed.");setCurrent("");setNext("")}catch(e){toast.error(e.response?.data?.message||"Could not change password.")}};
+ return <div className="w-11/12 max-w-3xl mx-auto py-12 grid md:grid-cols-2 gap-6">
+  <div className="bg-white rounded-2xl shadow p-8"><p className="text-green-700 font-semibold">ACCOUNT</p><h1 className="text-4xl font-bold text-[#0a472e]">My Profile</h1><p className="text-gray-500 mt-2">{user?.email}</p><form onSubmit={save} className="space-y-5 mt-8"><input value={name} onChange={e=>setName(e.target.value)} className="input w-full border rounded-lg" placeholder="Full name"/><input value={photo} onChange={e=>setPhoto(e.target.value)} className="input w-full border rounded-lg" placeholder="Photo URL"/><button className="w-full py-3 rounded-lg bg-[#0a472e] text-white font-semibold">Save Profile</button></form></div>
+  <div className="bg-white rounded-2xl shadow p-8"><p className="text-green-700 font-semibold">SECURITY</p><h2 className="text-2xl font-bold text-[#0a472e]">Change password</h2><form onSubmit={change} className="space-y-4 mt-6"><input required type="password" value={current} onChange={e=>setCurrent(e.target.value)} className="input w-full border rounded-lg" placeholder="Current password"/><input required type="password" value={next} onChange={e=>setNext(e.target.value)} className="input w-full border rounded-lg" placeholder="New password"/><button className="w-full py-3 rounded-lg bg-[#a8b324] text-[#0a472e] font-semibold">Change Password</button></form></div>
+ </div>
+}
